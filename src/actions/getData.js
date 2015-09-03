@@ -1,19 +1,32 @@
-function getData(input, state, output, services) {
+function getData(ipaddress, show) {
+
+    return function get(input, state, output, services) {
 
 
-    console.log('get data');
+        console.log('get data for ip', ipaddress);
+        console.log(input);
 
-    window.fetch('api/get?ip=10.65.6.1&show=desc').then(function(response) {
-        return response.text()
-    }).then(function(s) {
-        output({
-            value: JSON.parse(s)
+        let g = `api/get?ip=${input.ipaddress}&show=${show}`;
+        console.log(g);
+        window.fetch(g).then(function(response) {
+            return response.text()
+        }).then(function(s) {
+
+            output.success({
+                value: JSON.parse(s)
+            });
+
+        }).catch(function(s) {
+            output.error({
+                value: null
+            });
         });
-    });
 
 
 
 
+    }
 }
+
 
 export default getData;

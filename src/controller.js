@@ -9,12 +9,15 @@ const model = Model({
     isLoading: false,
     snmpdata: null,
     items1: [{
-        id: 0,
-        text: 'Item1'
+        id: '10.65.6.1',
+        text: 'C3560-p-hlth'
     }, {
-        id: 1,
+        id: '10.65.101.233',
         text: 'Item2'
-    },{id:2,text:'Item3'}]
+    },
+    {id:'10.65.101.234',text:'Item3'},
+    {id:'10.65.101.235',text:'Item4'}
+]
 });
 
 const services = {
