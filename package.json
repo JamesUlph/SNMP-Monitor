@@ -1,0 +1,32 @@
+{
+  "name": "snmp-test",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "babel-node --watch --stage 0 index.js",
+    "deploy": "babel src\\server --out-dir lib -w",
+    "watch": "nodemon lib\\index.js"
+  },
+  "author": "James Ulph",
+  "license": "MIT",
+  "dependencies": {
+    "baobab": "^2.0.0-rc1",
+    "cerebral": "^0.17.7",
+    "cerebral-baobab": "^0.1.2",
+    "cerebral-react": "^0.1.3",
+    "express": "^4.13.3",
+    "react": "^0.13.3",
+    "simple-node-logger": "^0.92.21",
+    "snmp-native": "^1.0.18",
+    "whatwg-fetch": "^0.9.0"
+  },
+  "devDependencies": {
+    "babel": "^5.8.23",
+    "babel-core": "^5.8.23",
+    "babel-loader": "^5.3.2",
+    "nodemon": "^1.4.1",
+    "webpack": "^1.12.0"
+  }
+}
