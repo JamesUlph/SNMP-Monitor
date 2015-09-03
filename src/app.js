@@ -1,3 +1,5 @@
+import './main.css';
+
 import React from 'react';
 import fetch from 'whatwg-fetch';
 
@@ -10,9 +12,15 @@ import setLoading from './actions/setLoading';
 import clearLoading from './actions/clearLoading';
 import getData from './actions/getData';
 import setOutput from './actions/setOutput';
+import set from './actions/set';
 
 controller.signal('setTitle',setLoading,setTitle,clearLoading);
-controller.signal('getData',setLoading,[getData],setOutput,clearLoading);
+controller.signal('getData',
+set('isLoading',true),
+[getData('192.168.1.254','desc'),{
+    success:[setOutput],
+    error:[]
+}],setOutput,set('isLoading',false));
 
 @Cerebral({
   title:['title'],
@@ -31,8 +39,8 @@ class App extends React.Component {
 
     handleClick(e){
 
-e.preventDefault();
-      this.props.signals.getData({o:'fred'});
+        e.preventDefault();
+        this.props.signals.getData({ipaddress:'10.65.6.1'});
 /*
       window.fetch('api/get?ip=10.65.6.1&show=desc').then(function(response){
         return response.text()
@@ -45,16 +53,16 @@ e.preventDefault();
     }
 
     handleClick2(){
-      window.fetch('api/get?ip=10.65.6.1&show=device').then(function(response){
-        return response.text()
-      }).then(function(s){
-        console.log(s);
-
+        window.fetch('api/get?ip=10.65.6.1&show=device').then(function(response){
+            return response.text()
+        }).then(function(s){
+            console.log(s);
       });
     }
 
     handleChange(e){
-            console.log(e.target.value);
+        console.log(e.target.value);
+        this.props.signals.getData({ipaddress:e.target.value});
     }
 
     render(){
@@ -66,7 +74,7 @@ e.preventDefault();
 
         return <div>
         {f}
-<select defaultValue={1} onChange={this.handleChange}>
+<select defaultValue={1} onChange={(e)=>this.handleChange(e)}>
 {s}
 </select>
 
